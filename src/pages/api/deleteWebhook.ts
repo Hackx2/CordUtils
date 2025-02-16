@@ -31,7 +31,8 @@ export default async function daLol(
       throw new Error(`Discord API error: ${discordResponse.status}`);
     
     res.json({ message: "Webhook successfully deleted" });
-  } catch (error) {
+  } catch (error:any) {
+    console.error(error);
     res.status(500).json({ error: "Failed to delete webhook" });
   }
 }
