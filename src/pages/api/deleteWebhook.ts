@@ -5,7 +5,7 @@ type ResponseData = {
   error?: string;
 };
 
-export default async function daLol(
+export default async function discordWebhookDel(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {

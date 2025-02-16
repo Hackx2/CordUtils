@@ -1,94 +1,52 @@
-import { useState } from "react";
 import { Trash2Icon, LoaderIcon } from "lucide-react";
-import NotiBox from "../components/NotificationBox";
+
+// Components
+import NotiBox from "@/components/NotificationBox";
 import Footer from "@/components/Footer";
+import Container from "@/components/Container";
+
+// Hooks
+import useDeleteHandler from "@/hooks/useDeleteHandler";
 
 export default function Home() {
-  const [webhookUrl, setWebhookUrl] = useState("");
-  const [message, setMessage] = useState("");
-  const [deleted, setDeleted] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const handleWebhookChange = (e:any) => {
-    setWebhookUrl(e.target.value);
-    setDeleted(false);
-  };
-
-  const handleDelete = async () => {
-    setIsDeleting(true);
-    setDeleted(false);
-
-    if (!webhookUrl) {
-      setMessage("Please enter a webhook URL.");
-      setIsDeleting(false);
-      return;
-    }
-
-    const regex = new RegExp("^https://discord\\.com/api/.*");
-    if (!webhookUrl.match(regex)) {
-      setMessage("This is not a Discord webhook URL.");
-      setIsDeleting(false);
-      return;
-    }
-
-    const match = webhookUrl.match(/https:\/\/discord\.com\/api\/webhooks\/(\d+)\/(\S+)/);
-    if (!match) {
-      setMessage("Invalid webhook URL");
-      setIsDeleting(false);
-      return;
-    }
-
-    const [, webhookId, webhookToken] = match;
-
-    try {
-      const response = await fetch("/api/deleteWebhook", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ webhookId, webhookToken }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setDeleted(true);
-        setMessage(data.message);
-      } else {
-        setDeleted(false);
-        setMessage(data.error);
-      }
-    } catch (error) {
-      setDeleted(false);
-      setMessage("Failed to delete webhook");
-    } finally {
-      setIsDeleting(false);
-    }
-  };
+  const deleteHandler = useDeleteHandler();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 bg-black text-white">
-      {message && (
+      {deleteHandler.message && (
         <NotiBox
-          message={message}
-          deleted={deleted}
-          onClose={() => setMessage("")}
+          message={deleteHandler.message}
+          status={deleteHandler.deleted ? "success" : "error"}
+          onClose={() => deleteHandler.setMessage("")}
         />
       )}
 
-      <main className="flex flex-col gap-2 w-full max-w-md p-6 rounded-lg shadow-lg backdrop-blur-md border border-gray-700">
-        <input
-          type="text"
-          placeholder="Enter Discord Webhook URL"
-          value={webhookUrl}
-          onChange={handleWebhookChange}
-          className="w-full p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:ring-1 focus:ring-white mb-2"
-        />
+      <Container>
+        {/* Webhook URL */}
+        <div className="mb-2">
+          <label htmlFor="webhook-url" className="text-sm text-gray-400">
+            Enter Discord Webhook URL
+          </label>
+          <input
+            id="webhook-url"
+            type="text"
+            placeholder="Enter Discord Webhook URL"
+            value={deleteHandler.webhookUrl}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              deleteHandler.setWebhookUrl(e.target.value);
+              deleteHandler.setDeleted(deleteHandler.deleted);
+            }}
+            className="w-full p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:ring-1 focus:ring-white mb-2"
+          />
+        </div>
 
+        {/* Delete Button */}
         <button
-          onClick={handleDelete}
+          onClick={deleteHandler.handleDelete}
           className="w-full bg-black text-white p-2 rounded-lg border border-gray-600 hover:bg-red-600 hover:border-red-700 transition flex items-center justify-center gap-2"
-          disabled={isDeleting}
+          disabled={deleteHandler.isDeleting}
         >
-          {isDeleting ? (
+          {deleteHandler.isDeleting ? (
             <>
               <LoaderIcon className="h-5 w-5 animate-spin" />
               <span>Deleting...</span>
@@ -101,8 +59,8 @@ export default function Home() {
           )}
         </button>
 
-        <Footer/>
-      </main>
+        <Footer />
+      </Container>
     </div>
   );
 }
