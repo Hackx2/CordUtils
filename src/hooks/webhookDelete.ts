@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function webhookDelete() {
+export default function WebhookDelete() {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [message, setMessage] = useState("");
   const [deleted, setDeleted] = useState(false);

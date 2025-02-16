@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 //i kinda like spam(da food)
-export default function webhookSpammer() {
+export default function WebhookSpammer() {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [message, setMessage] = useState("Spam message here...");
   const [intervalValue, setIntervalValue] = useState(1000);
