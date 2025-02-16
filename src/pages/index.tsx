@@ -6,13 +6,14 @@ import Footer from "@/components/Footer";
 import Container from "@/components/Container";
 
 // Hooks
-import useDeleteHandler from "@/hooks/useDeleteHandler";
+import useDeleteHandler from "@/hooks/webhookDelete";
 
 export default function Home() {
   const deleteHandler = useDeleteHandler();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 bg-black text-white">
+      <title>CordUtils - Webhook killer 💀</title>
       {deleteHandler.message && (
         <NotiBox
           message={deleteHandler.message}
@@ -22,15 +23,14 @@ export default function Home() {
       )}
 
       <Container>
-        {/* Webhook URL */}
         <div className="mb-2">
           <label htmlFor="webhook-url" className="text-sm text-gray-400">
-            Enter Discord Webhook URL
+            Discord Webhook URL:
           </label>
           <input
             id="webhook-url"
             type="text"
-            placeholder="Enter Discord Webhook URL"
+            placeholder="Webhook URL"
             value={deleteHandler.webhookUrl}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               deleteHandler.setWebhookUrl(e.target.value);
@@ -39,8 +39,7 @@ export default function Home() {
             className="w-full p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:ring-1 focus:ring-white mb-2"
           />
         </div>
-
-        {/* Delete Button */}
+        
         <button
           onClick={deleteHandler.handleDelete}
           className="w-full bg-black text-white p-2 rounded-lg border border-gray-600 hover:bg-red-600 hover:border-red-700 transition flex items-center justify-center gap-2"

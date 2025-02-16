@@ -31,7 +31,7 @@ export default function NotificationBox({
     >
       <div className="flex items-center gap-2">
         {statusIcon}
-        <span className={`text-sm ${statusColor}`}>
+        <span className={`text-sm`}>
           <span className="font-bold">{status.charAt(0).toUpperCase() + status.slice(1)}: </span>
           {message}
         </span>
