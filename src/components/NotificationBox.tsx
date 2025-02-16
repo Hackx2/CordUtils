@@ -1,6 +1,6 @@
 import { AlertCircleIcon, Check, X, HelpCircle } from "lucide-react";
 
-type NotificationBoxProps = {
+interface NotificationBoxProps {
   message: string;
   status: string;
   onClose: () => void;

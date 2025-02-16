@@ -8,7 +8,7 @@ import Container from "@/components/Container";
 // Hooks
 import webhookSpam from "@/hooks/webhookSpammer";
 
-export default function WebhookSpammer() {
+export default function Spam() {
   const handler = webhookSpam();
 
   return (

@@ -6,4 +6,6 @@ npm run dev
 yarn dev
 pnpm dev
 bun dev
+
+yarn vercel dev # NEEDS: vercel cli or whatever is called
 ```

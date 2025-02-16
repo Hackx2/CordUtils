@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useDeleteHandler() {
+export default function webhookDelete() {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [message, setMessage] = useState("");
   const [deleted, setDeleted] = useState(false);
@@ -23,7 +23,9 @@ export default function useDeleteHandler() {
       return;
     }
 
-    const match = webhookUrl.match(/https:\/\/discord\.com\/api\/webhooks\/(\d+)\/(\S+)/);
+    const match = webhookUrl.match(
+      /https:\/\/discord\.com\/api\/webhooks\/(\d+)\/(\S+)/
+    );
     if (!match) {
       setMessage("Invalid webhook URL");
       setIsDeleting(false);
@@ -33,7 +35,7 @@ export default function useDeleteHandler() {
     const [, webhookId, webhookToken] = match;
 
     try {
-      const response = await fetch("/api/deleteWebhook", {
+      const response = await fetch("/api/DiscordAPI", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ webhookId, webhookToken }),
@@ -41,10 +43,16 @@ export default function useDeleteHandler() {
 
       if (response.status === 429) {
         const retryAfter = response.headers.get("Retry-After");
-        const retryTime = retryAfter ? parseInt(retryAfter, 10) * 1000 : 60 * 1000;
+        const retryTime = retryAfter
+          ? parseInt(retryAfter, 10) * 1000
+          : 60 * 1000;
 
         setDeleted(false);
-        setMessage(`Rate limit exceeded. Please try again after ${retryTime / 1000} seconds.`);
+        setMessage(
+          `Rate limit exceeded. Please try again after ${
+            retryTime / 1000
+          } seconds.`
+        );
 
         setTimeout(() => setMessage(""), retryTime);
 
@@ -59,7 +67,9 @@ export default function useDeleteHandler() {
         setMessage(data.message);
       } else {
         setDeleted(false);
-        setMessage(data.error || "An error occurred while deleting the webhook.");
+        setMessage(
+          data.error || "An error occurred while deleting the webhook."
+        );
       }
     } catch (error) {
       setDeleted(false);

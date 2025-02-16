@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 //i kinda like spam(da food)
-export default function useWebhookSpammer() {
+export default function webhookSpammer() {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [message, setMessage] = useState("Spam message here...");
   const [intervalValue, setIntervalValue] = useState(1000);
@@ -25,11 +25,13 @@ export default function useWebhookSpammer() {
 
     const sendSpamMessage = async () => {
       try {
-        await fetch(webhookUrl, {
+        const response = await fetch("/api/DiscordAPI", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content: message }),
+          body: JSON.stringify({ webhookUrl, message }),
         });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Unknown error");
       } catch (error) {
         setSpamStatus("Failed to send message.");
         setNotiStatus("error");
@@ -50,25 +52,21 @@ export default function useWebhookSpammer() {
   };
 
   return {
-    webhookUrl, // webhook
+    webhookUrl,
     setWebhookUrl,
-
-    message, // message stuff
+    message,
     setMessage,
-
-    setIntervalValue, // interval stuff
+    setIntervalValue,
     intervalValue,
     intervalId,
     setIntervalId,
-
-    isSpamming, //spammin stuff
+    isSpamming,
     setIsSpamming,
     spamStatus,
     setSpamStatus,
     stopSpamming,
     startSpamming,
-
-    notiStatus, // noti stuff
+    notiStatus,
     setNotiStatus,
   };
 }
