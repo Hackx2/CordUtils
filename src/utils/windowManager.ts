@@ -3,7 +3,7 @@ import { useEffect } from "react";
 /**
  * stops da event lol
  */
-export function preventEvent(name: string) {
+export function PreventEvent(name: string) {
     useEffect(() => {
         const handler = (event: Event) => event.preventDefault();
         document.addEventListener(name, handler);
@@ -17,7 +17,7 @@ export function preventEvent(name: string) {
 /**
  * Background moves a lil (based on mouse's x & y axies).
  */
-export function backgroundMovement() {
+export function BackgroundMovement() {
     const zoom:number = 110;
     const intensity:number = 20;
             
