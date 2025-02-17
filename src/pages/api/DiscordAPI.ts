@@ -14,9 +14,7 @@ const sendToDiscord = async (webhookUrl: string, message: string) => {
 
   if (discordResponse.ok) return discordResponse;
 
-  const rateLimitRemaining = discordResponse.headers.get(
-    "X-RateLimit-Remaining"
-  );
+  const rateLimitRemaining = discordResponse.headers.get("X-RateLimit-Remaining");
   const rateLimitReset = discordResponse.headers.get("X-RateLimit-Reset");
   const retryAfter = discordResponse.headers.get("Retry-After");
 
@@ -25,6 +23,28 @@ const sendToDiscord = async (webhookUrl: string, message: string) => {
     console.log(`Rate limit reached. Retrying in ${waitTime / 1000} seconds.`);
     await new Promise((resolve) => setTimeout(resolve, waitTime));
     return sendToDiscord(webhookUrl, message);
+  }
+
+  throw new Error(`Discord API error: ${discordResponse.status}`);
+};
+
+const deleteWebhook = async (webhookId: string, webhookToken: string) => {
+  const discordResponse = await fetch(
+    `https://discord.com/api/webhooks/${webhookId}/${webhookToken}`,
+    { method: "DELETE" }
+  );
+
+  if (discordResponse.ok) return discordResponse;
+
+  const rateLimitRemaining = discordResponse.headers.get("X-RateLimit-Remaining");
+  const rateLimitReset = discordResponse.headers.get("X-RateLimit-Reset");
+  const retryAfter = discordResponse.headers.get("Retry-After");
+
+  if (rateLimitRemaining === "0" && rateLimitReset && retryAfter) {
+    const waitTime = Math.max(Number(retryAfter) * 1000, 1000);
+    console.log(`Rate limit reached. Retrying in ${waitTime / 1000} seconds.`);
+    await new Promise((resolve) => setTimeout(resolve, waitTime));
+    return deleteWebhook(webhookId, webhookToken);
   }
 
   throw new Error(`Discord API error: ${discordResponse.status}`);
@@ -62,19 +82,13 @@ export default async function webhookHandler(
       return res.status(400).json({ error: "Missing webhook ID or token" });
 
     try {
-      const discordResponse = await fetch(
-        `https://discord.com/api/webhooks/${webhookId}/${webhookToken}`,
-        { method: "DELETE" }
-      );
-
-      if (!discordResponse.ok) {
-        throw new Error(`Discord API error: ${discordResponse.status}`);
-      }
-
+      await deleteWebhook(webhookId, webhookToken);
       res.json({ message: "Webhook successfully deleted" });
     } catch (error: any) {
       console.error(error);
       res.status(500).json({ error: "Failed to delete webhook" });
     }
-  } else res.status(405).json({ error: "Method not allowed" });
+  } else {
+    res.status(405).json({ error: "Method not allowed" });
+  }
 }

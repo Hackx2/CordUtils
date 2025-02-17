@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { validateUrl, grabDetails } from "@/utils/webhookUtils"; 
 
 export default function WebhookDelete() {
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -16,16 +17,14 @@ export default function WebhookDelete() {
       return;
     }
 
-    const regex = new RegExp("^https://discord\\.com/api/.*");
-    if (!webhookUrl.match(regex)) {
-      setMessage("This is not a Discord webhook URL.");
+    const validationError = validateUrl(webhookUrl);
+    if (validationError) {
+      setMessage(validationError);
       setIsDeleting(false);
       return;
     }
 
-    const match = webhookUrl.match(
-      /https:\/\/discord\.com\/api\/webhooks\/(\d+)\/(\S+)/
-    );
+    const match = grabDetails(webhookUrl);
     if (!match) {
       setMessage("Invalid webhook URL");
       setIsDeleting(false);
@@ -41,25 +40,6 @@ export default function WebhookDelete() {
         body: JSON.stringify({ webhookId, webhookToken }),
       });
 
-      if (response.status === 429) {
-        const retryAfter = response.headers.get("Retry-After");
-        const retryTime = retryAfter
-          ? parseInt(retryAfter, 10) * 1000
-          : 60 * 1000;
-
-        setDeleted(false);
-        setMessage(
-          `Rate limit exceeded. Please try again after ${
-            retryTime / 1000
-          } seconds.`
-        );
-
-        setTimeout(() => setMessage(""), retryTime);
-
-        setIsDeleting(false);
-        return;
-      }
-
       const data = await response.json();
 
       if (response.ok) {
@@ -67,9 +47,7 @@ export default function WebhookDelete() {
         setMessage(data.message);
       } else {
         setDeleted(false);
-        setMessage(
-          data.error || "An error occurred while deleting the webhook."
-        );
+        setMessage(data.error || "An error occurred while deleting the webhook.");
       }
     } catch (error) {
       setDeleted(false);

@@ -1,20 +1,43 @@
 import { useState } from "react";
-
-//i kinda like spam(da food)
+import { validateUrl, grabDetails } from "@/utils/webhookUtils"; 
+// I kinda like spam (da food)
 export default function WebhookSpammer() {
   const [webhookUrl, setWebhookUrl] = useState("");
-  const [message, setMessage] = useState("Spam message here...");
+  const [message, setMessage] = useState("");
   const [intervalValue, setIntervalValue] = useState(1000);
   const [isSpamming, setIsSpamming] = useState(false);
   const [spamStatus, setSpamStatus] = useState("");
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [notiStatus, setNotiStatus] = useState<
     "info" | "success" | "error" | "warning"
   >("info");
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   const startSpamming = async () => {
     if (!webhookUrl || !message) {
-      setSpamStatus("Please provide a webhook URL and a message.");
+      if (!webhookUrl || !message)
+        setSpamStatus(
+          `Please provide a ${
+            !webhookUrl && !message
+              ? "webhook URL and a message"
+              : !message
+              ? "message"
+              : "webhook URL"
+          }.`
+        );
+      setNotiStatus("error");
+      return;
+    }
+
+    const validationError = validateUrl(webhookUrl);
+    if (validationError) {
+      setSpamStatus(validationError);
+      setNotiStatus("error");
+      return;
+    }
+
+    const match = grabDetails(webhookUrl);
+    if (!match) {
+      setSpamStatus("Invalid webhook URL");
       setNotiStatus("error");
       return;
     }
