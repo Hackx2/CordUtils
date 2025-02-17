@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.cdnfonts.com/css/vcr-osd-mono');
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,12 +16,39 @@
   }
 }
 
+
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'VCR OSD Mono', monospace;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('../../static/wallpaper.gif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  color: white;
 }
 
 * {
-  cursor: url('../../public/dot.png') 8 8, auto !important;
+  cursor: url('../../static/dot.png') 8 8, auto !important;
+}
+
+/* txt effects */
+.redTextEffect {
+  display: inline-block;
+  color: #ff0000;
+  font-weight: bold;
+  background-image: url(../../static/effects/red.gif);
+}
+
+.goldTextEffect {
+  display: inline-block;
+  color: #FFD700;
+  font-weight: bold;
+  background-image: url(../../static/effects/gold.gif);
+}
+
+.purpleTextEffect {
+  display: inline-block;
+  color: #bb71e4;
+  font-weight: bold;
+  background-image: url(../../static/effects/purple.gif);
 }

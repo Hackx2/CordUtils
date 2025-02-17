@@ -1,4 +1,5 @@
 import { LoaderIcon } from "lucide-react";
+import { useState } from "react";
 
 // Components
 import NotiBox from "@/components/NotificationBox";
@@ -11,9 +12,20 @@ import webhookSpam from "@/hooks/webhookSpammer";
 export default function Spam() {
   const handler = webhookSpam();
 
+  const [openNoti, setOpenNoti] = useState(true); // FUCK OFF
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 bg-black text-white">
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 text-white">
       <title>CordUtils - Webhook Spammer 🥩</title>
+
+      {openNoti && (
+        <NotiBox
+          message={`prob against Discord's TOS; soooo, don't use this. \n---\n:3`}
+          status="Info"
+          onClose={() => setOpenNoti(false)}
+        />
+      )}
+
       {handler.spamStatus && (
         <NotiBox message={handler.spamStatus} status={handler.notiStatus} onClose={() => handler.setSpamStatus("")} />
       )}
@@ -21,7 +33,7 @@ export default function Spam() {
       <Container>
         <div className="mb-2">
           <label htmlFor="webhook-url" className="text-sm text-gray-400">
-            Discord Webhook URL:
+            Webhook URL
           </label>
           <input
             id="webhook-url"
@@ -29,7 +41,7 @@ export default function Spam() {
             placeholder="Webhook URL"
             value={handler.webhookUrl}
             onChange={(e) => handler.setWebhookUrl(e.target.value)}
-            className="w-full p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:ring-1 focus:ring-white mb-2"
+            className="w-full p-3 rounded-lg border border-gray-600 bg-black/30 text-white focus:outline-none focus:ring-1 focus:ring-white mb-2 shadow-lg backdrop-blur-lg"
           />
         </div>
 
@@ -42,20 +54,20 @@ export default function Spam() {
             placeholder="Enter message to spam"
             value={handler.message}
             onChange={(e) => handler.setMessage(e.target.value)}
-            className="w-full p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:ring-1 focus:ring-white mb-2"
+            className="w-full p-3 rounded-lg border border-gray-600 bg-black/30 text-white focus:outline-none focus:ring-1 focus:ring-white mb-2 shadow-lg backdrop-blur-lg"
           />
         </div>
 
         <div className="mb-2">
           <label htmlFor="interval" className="text-sm text-gray-400">
-            Interval (ms)
+            Interval(ms)
           </label>
           <input
             id="interval"
             type="number"
             value={handler.intervalValue}
             onChange={(e) => handler.setIntervalValue(Number(e.target.value))}
-            className="w-full p-3 rounded-lg border border-gray-600 bg-black text-white focus:outline-none focus:ring-1 focus:ring-white mb-2"
+            className="w-full p-3 rounded-lg border border-gray-600 bg-black/30 text-white focus:outline-none focus:ring-1 focus:ring-white mb-2 shadow-lg backdrop-blur-lg"
             placeholder="Interval (ms)"
           />
         </div>
@@ -63,7 +75,7 @@ export default function Spam() {
         <div className="flex gap-2">
           <button
             onClick={handler.startSpamming}
-            className="w-full bg-black text-white p-2 rounded-lg border border-gray-600 hover:bg-red-600 hover:border-red-700 transition flex items-center justify-center gap-2"
+            className={`w-full bg-black/30 text-white p-2 rounded-lg border border-gray-600 ${handler.isSpamming ? "" : "hover:border-red-700"} transition flex items-center justify-center gap-2 shadow-lg backdrop-blur-lg`}
             disabled={handler.isSpamming}
           >
             {handler.isSpamming ? (
@@ -72,16 +84,16 @@ export default function Spam() {
                 <span>Spamming...</span>
               </>
             ) : (
-              <span>Start Spamming</span>
+              <span>init</span>
             )}
           </button>
 
           {handler.isSpamming && (
             <button
               onClick={handler.stopSpamming}
-              className="w-full bg-red-600 text-white p-2 rounded-lg border border-gray-600 hover:bg-red-700 transition"
+              className="w-full bg-black/30 text-white p-2 rounded-lg border border-gray-600 hover:border-red-700 transition shadow-lg backdrop-blur-lg"
             >
-              Stop Spamming
+              kill
             </button>
           )}
         </div>
@@ -90,4 +102,4 @@ export default function Spam() {
       </Container>
     </div>
   );
-}
+}// ITZ MASSIVE -ninja
