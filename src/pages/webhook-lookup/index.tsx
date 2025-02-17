@@ -2,10 +2,10 @@ import { LoaderIcon, EyeIcon, EyeOffIcon, RefreshCcw } from "lucide-react";
 import Container from "@/components/Container";
 import NotiBox from "@/components/NotificationBox";
 import Footer from "@/components/Footer";
-import { lookup } from "@/hooks/webhookLookup";
+import { WebhookLookup } from "@/hooks/webhookLookup";
 
 export default function WebhookInfo() {
-    const hook = lookup();
+    const hook = WebhookLookup();
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 text-white">
