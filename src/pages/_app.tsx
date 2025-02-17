@@ -1,19 +1,18 @@
+// css???
 import "@/styles/globals.css";
-import { useEffect } from 'react'
+
+// Types
 import type { AppProps } from "next/app";
+
+// Components
 import Header from "@/components/Header";
 
-export default function App({ Component, pageProps }: AppProps) {
-  const hcontext = (UEAH: { preventDefault: () => void }) => {
-    UEAH.preventDefault()
-  }
+// la sexy window manager
+import { preventEvent, backgroundMovement } from "@/utils/windowManager";
 
-  useEffect(() => {
-    document.addEventListener('contextmenu', hcontext)
-    return function cleanme() {
-      document.removeEventListener('contextmenu', hcontext)
-    }
-  })
+export default function App({ Component, pageProps }: AppProps) {
+  backgroundMovement();
+  preventEvent('contextmenu');
 
   return (<><Header/><Component {...pageProps} /></>);
 }

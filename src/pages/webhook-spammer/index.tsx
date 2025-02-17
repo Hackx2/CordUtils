@@ -1,4 +1,4 @@
-import { LoaderIcon } from "lucide-react";
+import { LoaderIcon, Play } from "lucide-react";
 import { useState } from "react";
 
 // Components
@@ -20,25 +20,27 @@ export default function Spam() {
 
       {openNoti && (
         <NotiBox
-          message={`prob against Discord's TOS; soooo, don't use this. \n---\n:3`}
+          message={`prob against Discord's TOS; sooooooooo, don't use this.`}
           status="Info"
           onClose={() => setOpenNoti(false)}
+          className="max-w-[650px]"
         />
       )}
 
       {handler.spamStatus && (
-        <NotiBox message={handler.spamStatus} status={handler.notiStatus} onClose={() => handler.setSpamStatus("")} />
+        <NotiBox className="max-w-[650px]" message={handler.spamStatus} status={handler.notiStatus} onClose={() => handler.setSpamStatus("")} />
       )}
 
-      <Container>
+      <Container className="max-w-[750px]">
         <div className="mb-2">
+          <h1 className="text-xl font-bold mb-4">./webhook-spammer</h1>
           <label htmlFor="webhook-url" className="text-sm text-gray-400">
             Webhook URL
           </label>
           <input
             id="webhook-url"
             type="text"
-            placeholder="Webhook URL"
+            placeholder="Enter Webhook URL"
             value={handler.webhookUrl}
             onChange={(e) => handler.setWebhookUrl(e.target.value)}
             className="w-full p-3 rounded-lg border border-gray-600 bg-black/30 text-white focus:outline-none focus:ring-1 focus:ring-white mb-2 shadow-lg backdrop-blur-lg"
@@ -54,7 +56,7 @@ export default function Spam() {
             placeholder="Enter message to spam"
             value={handler.message}
             onChange={(e) => handler.setMessage(e.target.value)}
-            className="w-full p-3 rounded-lg border border-gray-600 bg-black/30 text-white focus:outline-none focus:ring-1 focus:ring-white mb-2 shadow-lg backdrop-blur-lg"
+            className="w-full max-h-[100px] p-3 rounded-lg border border-gray-600 bg-black/30 text-white focus:outline-none focus:ring-1 focus:ring-white mb-2 shadow-lg backdrop-blur-lg"
           />
         </div>
 
@@ -84,7 +86,10 @@ export default function Spam() {
                 <span>Spamming...</span>
               </>
             ) : (
-              <span>init</span>
+              <>
+              <Play className="h-5 w-5" />
+              <span>Start</span>
+             </>
             )}
           </button>
 
@@ -98,7 +103,7 @@ export default function Spam() {
           )}
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </Container>
     </div>
   );

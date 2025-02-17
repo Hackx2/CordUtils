@@ -24,13 +24,14 @@ export default function Home() {
 
       <Container>
         <div className="mb-2">
+          <h1 className="text-xl font-bold mb-4">./webhook-delete</h1>
           <label htmlFor="webhook-url" className="text-sm text-gray-400">
             Discord Webhook URL
           </label>
           <input
             id="webhook-url"
             type="text"
-            placeholder="Webhook URL"
+            placeholder="Enter Webhook URL"
             value={deleteHandler.webhookUrl}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               deleteHandler.setWebhookUrl(e.target.value);
@@ -59,7 +60,7 @@ export default function Home() {
           )}
         </button>
 
-        <Footer />
+        {/* <Footer /> */}
       </Container>
     </div>
   );

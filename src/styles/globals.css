@@ -25,10 +25,12 @@ body {
   background-attachment: fixed;
   height: 100vh;
   color: white;
+  margin: 0;
+  overflow: hidden;
 }
 
 * {
-  cursor: url('../../static/dot.png') 8 8, auto !important;
+  cursor: url('../../static/cursor.png') 8 8, auto !important;
 }
 
 /* txt effects */
