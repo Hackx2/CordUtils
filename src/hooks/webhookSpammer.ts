@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { validateUrl, grabDetails } from "@/utils/webhookUtils"; 
+import { validateUrl, grabDetails } from "@/utils/webhookUtils";
+ 
 // I kinda like spam (da food)
 export default function WebhookSpammer() {
   const [webhookUrl, setWebhookUrl] = useState("");
