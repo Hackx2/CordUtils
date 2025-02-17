@@ -1,7 +1,7 @@
 import { NextRouter, useRouter } from "next/router";
 import { useEffect } from "react";
 
-export default function redir() {// owo
+export default function Redir_Index() {// owo
   const router : NextRouter = useRouter();
 
   useEffect(() => {

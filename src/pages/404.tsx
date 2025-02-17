@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 
-export default function redir404() {// gwa, lol
+export default function Redir_404() {// gwa, lol
   const router : NextRouter = useRouter();
 
   useEffect(() => {
