@@ -1,12 +1,7 @@
-import { useEffect } from 'react';
-import { NextRouter, useRouter } from 'next/router';
+import { OpenWindowLink } from "@/utils/windowManager";
 
-export default function Redir_404() {// gwa, lol
-  const router : NextRouter = useRouter();
-
-  useEffect(() => {
-    router.push('/');
-  }, [router]);
+export default function Page404() {// gwa, lol
+  OpenWindowLink('/')
 
   return null;
 }

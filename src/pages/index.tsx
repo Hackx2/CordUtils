@@ -1,12 +1,7 @@
-import { NextRouter, useRouter } from "next/router";
-import { useEffect } from "react";
+import { OpenWindowLink } from "@/utils/windowManager";
 
-export default function Redir_Index() {// owo
-  const router : NextRouter = useRouter();
-
-  useEffect(() => {
-    router.push('/webhook-delete');
-  }, [router]);
+export default function PageIndex() {// owo
+  OpenWindowLink('/webhook/delete');// homescreen when?!?!????!
 
   return null;
 }

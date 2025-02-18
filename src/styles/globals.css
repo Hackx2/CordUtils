@@ -17,6 +17,7 @@
 }
 
 
+/* background */
 body {
   font-family: 'VCR OSD Mono', monospace;
   background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('../../static/wallpaper.gif');
@@ -29,6 +30,7 @@ body {
   overflow: hidden;
 }
 
+/* custom cursor */
 * {
   cursor: url('../../static/cursor.png') 8 8, auto !important;
 }
