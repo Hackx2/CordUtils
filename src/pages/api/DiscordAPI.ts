@@ -36,6 +36,7 @@ const deleteWebhook = async (webhookId: string, webhookToken: string) => {
 
   if (discordResponse.ok) return discordResponse;
 
+
   const rateLimitRemaining = discordResponse.headers.get("X-RateLimit-Remaining");
   const rateLimitReset = discordResponse.headers.get("X-RateLimit-Reset");
   const retryAfter = discordResponse.headers.get("Retry-After");
@@ -86,6 +87,7 @@ export default async function webhookHandler(
       res.json({ message: "Webhook successfully deleted" });
     } catch (error: any) {
       console.error(error);
+      res.status(404).json({ error: "Invalid webhook url" });// i forgor abt 404 : not found
       res.status(500).json({ error: "Failed to delete webhook" });
     }
   } else {

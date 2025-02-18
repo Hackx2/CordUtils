@@ -27,18 +27,26 @@ export function PreventEvent(name: string) {
  * Background moves a lil (based on mouse's x & y axies).
  */
 export function BackgroundMovement() {
-  const zoom: number = 110;
+  const zoom: number = 130;
   const intensity: number = 20;
 
   useEffect(() => {
-    const laMovement = (e: MouseEvent) => {
-      const body = document.body;
+
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;// no touch screen ppl :o
+
+    const laMovement = (_ : MouseEvent) => {
+      const body : HTMLElement = document.body;
+
       body.style.backgroundSize = `${zoom}%`;
 
-      const x = (e.clientX / window.innerWidth - 0.5) * intensity;
-      const y = (e.clientY / window.innerHeight - 0.5) * intensity;
+      const x : number = (_.clientX / window.innerWidth - 0.5) * intensity;
+      const y : number = (_.clientY / window.innerHeight - 0.5) * intensity;
 
-      body.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
+      const calcPos:string = `calc(50% + ${x}px) calc(50% + ${y}px)`;
+      body.style.backgroundPosition = calcPos;
+
+      body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
+      url('../../static/wallpaper.gif')`
     };
     document.addEventListener("mousemove", laMovement);
 

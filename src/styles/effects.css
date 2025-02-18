@@ -1,0 +1,21 @@
+/* txt effects */
+.redTextEffect {
+    display: inline-block;
+    color: #ff0000;
+    font-weight: bold;
+    background-image: url(../../static/effects/red.gif);
+}
+
+.goldTextEffect {
+    display: inline-block;
+    color: #FFD700;
+    font-weight: bold;
+    background-image: url(../../static/effects/gold.gif);
+}
+
+.purpleTextEffect {
+    display: inline-block;
+    color: #bb71e4;
+    font-weight: bold;
+    background-image: url(../../static/effects/purple.gif);
+}

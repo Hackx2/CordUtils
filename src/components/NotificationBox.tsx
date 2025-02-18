@@ -38,7 +38,7 @@ export default function NotificationBox({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`rounded-xl shadow-2xl backdrop-blur-lg gap-2 w-full p-3.5 flex items-center justify-between rounded border ${statusColor} mb-4 max-h-[90vh] overflow-y-auto 
+      className={`rounded-xl shadow-2xl backdrop-blur-lg gap-2 w-full p-3.5 flex items-center justify-between border ${statusColor} mb-4 max-h-[90vh] overflow-y-auto 
         ${className.includes("max-w-") ? "" : "max-w-md"} ${className}`}
     >
       <div className="flex items-center gap-2 ">

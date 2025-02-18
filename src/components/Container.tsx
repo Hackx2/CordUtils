@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Header from "./Header";
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -7,6 +8,8 @@ interface ContainerProps {
 }
 
 const Container: React.FC<ContainerProps> = ({ children, className = "" }) => (
+  <>
+  <Header />
   <motion.div
     initial={{ opacity: 0, y: -10 }}
     animate={{ opacity: 1, y: 0 }}
@@ -17,6 +20,7 @@ const Container: React.FC<ContainerProps> = ({ children, className = "" }) => (
   >
     {children}
   </motion.div>
+  </>
 );
 
 
