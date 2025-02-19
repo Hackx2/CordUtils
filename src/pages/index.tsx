@@ -1,7 +1,7 @@
-import { OpenWindowLink } from "@/utils/windowManager";
+import { OpenLink } from "@/utils/WindowManager";
 
 export default function PageIndex() : null {// owo
-  OpenWindowLink('/webhook/delete');// homescreen when?!?!????!
+  OpenLink('/webhook/delete');// homescreen when?!?!????!
   console.log(`why u here?!?!?!?`);
   return null;
 }

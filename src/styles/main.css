@@ -1,0 +1,22 @@
+body {
+  /* Da Font Lmao */
+  font-family: 'VCR OSD Mono', monospace;
+
+  /* Background Image */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
+  url('../../static/wallpaper.gif');
+
+  /* Background Size */
+  background-size: cover;
+
+  /* Background Position */
+  background-position: center;
+
+  /* height of de body??? */
+  height: 100vh;
+}
+
+* {
+  /* Custom Cursor URL */
+  cursor: url('../../static/cursor.svg') 8 8, auto !important;
+}

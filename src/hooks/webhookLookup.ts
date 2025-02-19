@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { useState } from "react";
-import { validateUrl } from "@/utils/webhookUtils";
+import { validateUrl } from "@/utils/WebhookUtils";
 
 export const WebhookLookup = () => {
     const [webhookUrl, setWebhookUrl] = useState("");

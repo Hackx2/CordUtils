@@ -1,18 +1,22 @@
 import { useEffect } from "react";
 import { NextRouter, useRouter } from "next/router";
 
-export function OpenWindowLink(link: string) {
+/**
+ * Pushes a link to the router.
+ * @param link Where you want the client to go.
+ */
+export function OpenLink(link: string) : void {
   const router: NextRouter = useRouter();
-
   useEffect(() => {
     router.push(link); // homescreen wehn???
   }, [router]);
 }
 
 /**
- * stops da event lol
+ * Prevents the given event.
+ * @param name Name of the event you want to prevent.
  */
-export function PreventEvent(name: string) {
+export function PreventEvent(name: string) : void {
   useEffect(() => {
     const handler = (event: Event) => event.preventDefault();
     document.addEventListener(name, handler);
@@ -26,8 +30,8 @@ export function PreventEvent(name: string) {
 /**
  * Background moves a lil (based on mouse's x & y axies).
  */
-export function BackgroundMovement() {
-  const zoom: number = 130;
+export function BackgroundMovement() : void {
+  const zoom: number = 160;
   const intensity: number = 20;
 
   useEffect(() => {
@@ -37,7 +41,7 @@ export function BackgroundMovement() {
     const laMovement = (_ : MouseEvent) => {
       const body : HTMLElement = document.body;
 
-      body.style.backgroundSize = `${zoom}%`;
+      body.style.backgroundSize = `${zoom}% !important`;
 
       const x : number = (_.clientX / window.innerWidth - 0.5) * intensity;
       const y : number = (_.clientY / window.innerHeight - 0.5) * intensity;

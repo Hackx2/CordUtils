@@ -17,6 +17,6 @@
     {
         "name": "./about",
         "path": "/about",
-        "className": "purpleTextEffect"
+        "className": "redTextEffect"
     }
 ]

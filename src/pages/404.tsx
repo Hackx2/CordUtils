@@ -1,6 +1,6 @@
-import { OpenWindowLink } from "@/utils/windowManager";
+import { OpenLink } from "@/utils/WindowManager";
 
 export default function Page404() : null {// gwa, lol
-  OpenWindowLink('/')
+  OpenLink('/')
   return null;
 }
