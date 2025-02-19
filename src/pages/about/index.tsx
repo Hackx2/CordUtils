@@ -25,10 +25,10 @@ export default function About() {
         <h1 className="text-xl font-bold mb-1">./about-cordutils</h1>
 
         <p className="">Coming Soon</p>
-        <div className="mt-4 flex items-center space-x-2">
+        {/* <div className="mt-4 flex items-center space-x-2">
           <Youtube size={24} />
-          <span>YouTube: CordUtils Official</span>
-        </div>
+          <span>YouTube: YourFriendOrbl</span>
+        </div> */}
       </Container>
     </div>
   );
