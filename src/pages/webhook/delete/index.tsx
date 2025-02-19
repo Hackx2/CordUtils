@@ -2,13 +2,12 @@ import { Trash2Icon, LoaderIcon } from "lucide-react";
 
 // Components
 import NotiBox from "@/components/NotificationBox";
-import Footer from "@/components/Footer";
 import Container from "@/components/Container";
 
 // Hooks
 import useDeleteHandler from "@/hooks/webhookDelete";
 
-export default function Home() {
+export default function WebhookDelete() {
   const deleteHandler = useDeleteHandler();
 
   return (

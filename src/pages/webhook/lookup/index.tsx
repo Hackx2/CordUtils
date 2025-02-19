@@ -1,10 +1,13 @@
 import { LoaderIcon, EyeIcon, EyeOffIcon, RefreshCcw } from "lucide-react";
+
+// Components
 import Container from "@/components/Container";
 import NotiBox from "@/components/NotificationBox";
-import Footer from "@/components/Footer";
+
+// Hooks
 import { WebhookLookup } from "@/hooks/webhookLookup";
 
-export default function WebhookInfo() {
+export default function _WebhookLookup() {
     const hook = WebhookLookup();
 
     return (
@@ -15,7 +18,7 @@ export default function WebhookInfo() {
                 <NotiBox className="max-w-[1000px]" message={hook.error} status={hook.errorType} onClose={() => hook.setError("")} />
             )}
 
-            <Container className="max-w-[1100px] p-6 rounded-lg border border-gray-600 shadow-lg backdrop-blur-lg">
+            <Container className="max-w-[1000px] p-6 rounded-lg border border-gray-600 shadow-lg backdrop-blur-lg">
                 <h1 className="text-xl font-bold mb-4">./lookup</h1>
 
                 <label htmlFor="webhook-url" className="text-sm text-gray-400">

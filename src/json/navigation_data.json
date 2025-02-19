@@ -1,0 +1,22 @@
+[
+    {
+        "name": "./del",
+        "path": "/webhook/delete",
+        "className": "goldTextEffect"
+    },
+    {
+        "name": "./spammer",
+        "path": "/webhook/spammer",
+        "className": "redTextEffect"
+    },
+    {
+        "name": "./lookup",
+        "path": "/webhook/lookup",
+        "className": "purpleTextEffect"
+    },
+    {
+        "name": "./about",
+        "path": "/about",
+        "className": "purpleTextEffect"
+    }
+]

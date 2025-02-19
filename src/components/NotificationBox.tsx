@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { AlertCircleIcon, Check, X, HelpCircle } from "lucide-react";
+import { AlertCircleIcon, MessageCircleWarning, Check, X, HelpCircle } from "lucide-react";
 
 interface NotificationBoxProps {
   message: string;
@@ -25,6 +25,10 @@ export default function NotificationBox({
     case "error":
       statusIcon = <AlertCircleIcon className="h-6 w-6 text-red-400 animate-pulse" />;
       statusColor = "border-red-600 bg-red-900/20 text-red-400";
+      break;
+    case "warning":
+      statusIcon = <MessageCircleWarning className="h-6 w-6 text-orange-400 animate-pulse" />;
+      statusColor = "border-orange-600 bg-red-900/20 text-orange-400";
       break;
     default:
       statusIcon = <HelpCircle className="h-6 w-6 text-blue-400 animate-pulse" />;

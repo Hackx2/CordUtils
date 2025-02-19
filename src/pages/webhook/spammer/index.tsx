@@ -9,7 +9,7 @@ import Container from "@/components/Container";
 // Hooks
 import webhookSpam from "@/hooks/webhookSpammer";
 
-export default function Spam() {
+export default function WebhookSpammer() {
   const handler = webhookSpam();
 
   const [openNoti, setOpenNoti] = useState(true); // FUCK OFF
