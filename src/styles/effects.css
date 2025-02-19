@@ -1,21 +1,26 @@
-/* txt effects */
+/* Red Flakes Text Effect */
 .redTextEffect {
-    display: inline-block;
-    color: #ff0000;
     font-weight: bold;
+    display: inline-block;
+
+    color: #ff0000;
     background-image: url(../../static/effects/red.gif);
 }
 
+/* Gold Flakes Text Effect */
 .goldTextEffect {
-    display: inline-block;
-    color: #FFD700;
     font-weight: bold;
+    display: inline-block;
+
+    color: #FFD700;
     background-image: url(../../static/effects/gold.gif);
 }
 
+/* Purple Flakes Text Effect */
 .purpleTextEffect {
-    display: inline-block;
-    color: #bb71e4;
     font-weight: bold;
+    display: inline-block;
+
+    color: #bb71e4;
     background-image: url(../../static/effects/purple.gif);
 }
