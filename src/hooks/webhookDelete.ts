@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { validateUrl, grabDetails } from "@/utils/WebhookUtils"; 
+import { validateUrl, grabDetails } from "@/utils/Utility"; 
 
 export default function WebhookDelete() {
   const [webhookUrl, setWebhookUrl] = useState("");
